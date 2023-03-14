@@ -251,3 +251,112 @@ For more information, see also:
 * [Distributed validator specs](https://github.com/ethereum/distributed-validator-specs)
 * [Distributed Validators: Improving Staking No Matter Your ETH Balance](https://www.youtube.com/watch?v=zSt6McTVNVE)
 * [MAXIMAL EXTRACTABLE VALUE (MEV)](https://ethereum.org/en/developers/docs/mev/)
+
+# 0x300 Integrations
+
+# I1: Basic
+
+## Control Objective
+
+The spirit of composability introduces many integrations between different entities, creating complex and multi-level relationships at the same time. This environment can introduce complex logical vulnerabilities or issues related to bad assumptions due to too much trust in external components.
+
+Ensure that the integration process satisfies the following high-level requirements:
+* We integrate with a proven component that we consider trusted,
+* Vulnerabilities identified in various Token implementations have been taken into account during implementation.
+
+Category “I1” lists requirements related to each integration with any smart contract.
+
+## Security Verification Requirements
+
+| # | Description |
+| --- | --- |
+| **I1.1** | Verify if the team is known and can be held liable for abuses. |
+| **I1.2** | Verify that the external contract you want to use has been audited. |
+| **I1.3** | Verify that the external contract you want to use has been verified on blockchain explorer (e.g., etherscan).  |
+| **I1.4** | Verify that the contract with which you are integrating has passed SCSVS. |
+| **I1.5** | Verify that the address of the integrated contract is correct, up-to-date, and consistent with the project documentation. |
+| **I1.6** | Verify if the external contract is upgradeable in a trusted manner. |
+| **I1.7** | Verify that no untrusted party can change the contract's implementation. |
+| **I1.8** | Verify that external contracts comply with the principle of minimum rights and that their access to special functions is enforced by the appropriate modifiers. |
+| **I1.9** | Verify whether the structures (types) received from the external contract are known and handled. |
+| **I1.10** | Verify that the smart contract attributes that can be updated by the external contracts (even trusted) are monitored (e.g. using events) and the procedure of incident response is implemented (e.g. the response to an ongoing attack). |
+| **I1.11** | Verify that the external contracts (even trusted) that are allowed to change the attributes of the smart contract (e.g., token price) have the following limitations implemented: a threshold for the change (e.g. no more/less than 5%) and a limit of updates (e.g., one update per day). |
+| **I1.12** | Verify that the address called via low-level call/delegatecall/staticcall exists (it will return *true* if the contract does not exist). |
+
+# I2: Token
+
+## Control Objective
+
+If a project integrates with external Token smart contracts, it is necessary to approach them with limited trust and check that they do not introduce unexpected behavior into our system.
+
+Ensure that a verified contract satisfies the following high-level requirements:
+* Contract follows a tested and stable Token standard,
+* The properties of the Token that we enter into our system are known and properly handled.
+* Vulnerabilities identified in various Token implementations have been taken into account during implementation.
+
+Category “I2” lists requirements related to the Token smart contract as one of the components with which the project integrates.
+
+## Security Verification Requirements
+
+| # | Description |
+| --- | --- |
+| **I2.1** | Verify if the external Token implementation is compliant with the standard implementation. |
+| **I2.2** | Verify if the rules on which a new external Token can be added to the system have been defined (no restrictions, any tokens added by Governance, etc.).  |
+| **I2.3** | Verify that the allowlist approach is used when only selected tokens are introduced to the system. |
+| **I2.4** | Verify if the external Token implementation is non-standard (e.g. it is deflationary, or contains a fee), it has been taken into consideration. |
+| **I2.5** | Verify that if the external Token implementation includes external calls, it has been taken into consideration (e.g., protection against reentrancy). |
+| **I2.6** | Verify that the external Token magnitude (decimals) are known and that all operations are executed with the correct magnitude. |
+| **I2.7** | Verify that the external Token supply is specified and corresponds to the documentation. |
+| **I2.8** | Verify that the external Tokens of any user cannot be locked or frozen by any entity (e.g., owner). |
+| **I2.9** | Verify that the reentrancy attack has been considered when using the token contracts with callbacks (e.g. ERC-777, ERC-721, ERC-1155). |
+| **I2.10** | Verify that transfer of external Tokens has been successful, comparing the balances before and after it. |
+| **I2.11** | Verify that project contracts handles correctly both types of tokens, those that return false on an error and those that revert. |
+| **I2.12** | Verify that the contract reverts on failed transfer. |
+| **I2.13** | Verify that the protocol handles double-entry tokens (tracking user balances in a contract represented by two addresses) correctly or forbids them. |
+| **I2.14** | Use OpenZeppelin's SafeERC20 for interacting with ERC20 tokens. |
+
+## References
+
+For more information, see also:
+
+* [Token Interaction Checklist Consensys](https://consensys.net/diligence/blog/2020/11/token-interaction-checklist/)
+* [Token Integration Checklist ToB](https://github.com/crytic/building-secure-contracts/blob/master/development-guidelines/token_integration.md)
+* [The Dangers of Token Integration](https://www.youtube.com/watch?v=6GaCt_lM_ak)
+* [Token Implementation Best Practice](https://consensys.github.io/smart-contract-best-practices/tokens/)
+* [iToken Duplication Incident Report](https://bzx.network/blog/incident)
+* [The Dangers of Surprising Code](https://samczsun.com/the-dangers-of-surprising-code/)
+* [ERC20 standard peculiarities](https://github.com/d-xo/weird-erc20)
+
+# I3: Oracle
+
+## Control Objective
+
+If a project integrates with external Oracle smart contracts, it is necessary to approach them with limited trust and check that they do not introduce unexpected behavior into our system.
+
+Ensure that a verified contract satisfies the following high-level requirements:
+* Contract follows a tested and stable Oracle standard,
+* The values transferred are additionally verified,
+* Vulnerabilities identified in various Oracle implementations have been taken into account during implementation.
+
+Category “I3” lists requirements related to the Oracle smart contract as one of the components with which the project integrates.
+
+## Security Verification Requirements
+
+| # | Description |
+| --- | --- |
+| **I3.1** | Verify that, when using Uniswap TWAP as a price oracle, the period is long enough to make its manipulation unprofitable for the attacker (compared to the funds at potential risk). |
+| **I3.2** | Verify that Oracle data is up-to-date. |
+| **I3.3** | Verify that no spot oracle is used (e.g. spot price from Uniswap pool). |
+| **I4.4** | Verify that, when using Uniswap V3 TWAP as price oracle, liquidity is high enough and is distributed widely across most of the price range. |
+| **I4.5** | Verify that, the use a decentralized off-chain oracles unsusceptible to on-chain price manipulation attacks (e.g. Chainlink) is considered for low liquidity asset, ideally combining it with on-chain oracles to detect malicious values. |
+
+## References
+
+For more information, see also:
+
+* [The Dangers of Price Oracles in Smart Contracts](https://www.youtube.com/watch?v=YGO7nzpXCeA)
+* [TWAP Oracle Manipulation Risks, Mudit Gupta - DeFi Security Summit 2022](https://www.youtube.com/watch?v=Mu8ytTyStOU)
+* [TWAP Oracles After the Merge, Mark Toda - DeFi Security Summit 2022](https://www.youtube.com/watch?v=mqrCvNgBXUk)
+* [So you want to use a price oracle](https://samczsun.com/so-you-want-to-use-a-price-oracle/)
+* [Pricing LP tokens | Warp Finance hack](https://cmichel.io/pricing-lp-tokens/)
+* [Uniswap V3 tick price manipulation](https://medium.com/@hacxyk/we-rescued-4m-from-rari-capital-but-was-it-worth-it-39366d4d1812)
