@@ -1,3 +1,94 @@
+# 0x100 General
+
+# G1: Architecture, design and threat modeling
+
+## Control Objective
+
+Architecture, design and threat modeling in the context of creating secure smart contracts.
+Consider all possible threats before the implementation of the smart contract.
+
+Ensure that a verified contract satisfies the following high-level requirements:
+* All related smart contracts are identified and used properly,
+* Specific smart contracts security assumptions are considered during the design phase.
+
+Category “G1” lists requirements related to the architecture, design and threat modeling of the smart contracts.
+
+## Security Verification Requirements
+
+| # | Description |
+| --- | --- |
+| **G1.1** | Verify that every introduced design change is preceded by an earlier threat modeling. |
+| **G1.2** | Verify that the documentation clearly and precisely defines all trust boundaries in the contract (trusted relations with other contracts and significant data flows).  |
+| **G1.3** | Verify that the SCSVS, security requirements or policy is available to all developers and testers. |
+| **G1.4** | Verify that the events for the (state changing/crucial for business) operations are defined. |
+| **G1.5** | Verify that there exists a mechanism that can temporarily stop the sensitive functionalities of the contract in case of a new attack. This mechanism should not block access to the assets (e.g. tokens) for their owners. |
+| **G1.6** | Verify that the amount of unused cryptocurrencies kept on the contract is controlled and at the minimum acceptable level so as not to become a potential target of an attack. |
+| **G1.7** | Verify that if fallback function can be called by anyone, it is included in the threat modeling. |
+| **G1.8** | Verify that the business logic in contracts is consistent. Important changes in the logic should be allowed for all or none contract. |
+| **G1.9** | Verify that code analysis tools are in use that can detect potentially malicious code. |
+| **G1.10** | Verify that the latest version of the major Solidity release is used. |
+| **G1.11** | Verify that, when using the external implementation of contract, you use the current version which has not been superseded. |
+| **G1.12** | Verify that when functions are overridden to extend functionality, the super keyword is used to maintain functionality. |
+| **G1.13** | Verify that the order of inheritance is carefully specified. |
+| **G1.14** | Verify that there is a component that monitors contract activity using events. |
+| **G1.15** | Verify that the threat model includes whale transactions. |
+| **G1.16** | Verify that the leakage of one person's private key does not compromise the security of the entire project. |
+
+## References
+
+For more information, see also:
+
+* [Instant Threat Modeling - SecuRing](https://www.youtube.com/watch?v=IwR4PAmRhhg&list=PL-lO2xrptAtav4SZgCdDkVxChWhVU3kmP&index=18)
+* [OWASP Threat Modeling Cheat Sheet](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Threat_Modeling_Cheat_Sheet.md)
+* [OWASP Attack Surface Analysis Cheat Sheet](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Attack_Surface_Analysis_Cheat_Sheet.md)
+* [OWASP Threat modeling](https://www.owasp.org/index.php/Application_Threat_Modeling)
+* [Microsoft SDL](https://www.microsoft.com/en-us/sdl/)
+* [NIST SP 800-57](https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-4/final)
+* [Use events to monitor contract activity](https://consensys.github.io/smart-contract-best-practices/recommendations/#use-events-to-monitor-contract-activity)
+* [An example of superseded contract - EIP 1820](https://eips.ethereum.org/EIPS/eip-1820)
+
+# G2: Policies and procedures
+
+## Control Objective
+
+Policies and procedures in the context of security of DeFi projects.
+Think about possible situations and be prepared in case they arise. Act consciously and efficiently in accordance with a well-thought-out strategy.
+
+Ensure that your project satisfies the following high-level requirements:
+* Security procedures and policies are thought out and ready to use,
+* Procedures and policies cover known and common threats from the past of other DeFi projects,
+* Employees are familiar with the policies and procedures, and they know what they are responsible for.
+
+Category “G2” lists requirements related to the policies, and procedures in the context of security of DeFi projects.
+
+## Security Verification Requirements
+
+| # | Description |
+| --- | --- |
+| **G2.1** | Verify that the system's security is under constant monitoring (e.g. the expected level of funds). |
+| **G2.2** | Verify that there is a policy to track new security bugs and to update the libraries to the latest secure version. |
+| **G2.3** | Verify that the contact to the security department is publicly disclosed and the procedure for handling reported bugs (e.g., thorough BugBounty platform) is defined. |
+| **G2.4** | Verify that the process prior to adding new components to the system is defined. |
+| **G2.5** | Verify that the process of major system changes involves threat modeling by an external company. |
+| **G2.6** | Verify that the process of adding and updating components to the system includes a security audit by an external company. |
+| **G2.7** | Verify that there is a clear and known procedure in place in the event of a hack. |
+| **G2.8** | Verify that the procedure in the event of hack have defined individuals to execute required actions. |
+| **G2.9** | Verify that the procedure includes alarming other projects about the hack through trusted channels. |
+| **G2.10** | Verify that a procedure is defined in case one of the project's private keys is leaked. |
+| **G2.11** | Verify that the project has an emergency contact with the external company that conducted the last audit. |
+
+## References
+
+For more information, see also:
+
+* [Emergency Procedures - Yearn Finance](https://docs.yearn.finance/vaults/0.4.2/process-and-procedures/emergency)
+* [Emergency tools - Yearn Finance](https://docs.yearn.finance/vaults/0.4.2/process-and-procedures/emergency#tools)
+* [Emergency checklist - Yearn Finance](https://docs.yearn.finance/vaults/0.4.2/process-and-procedures/emergency#emergency-checklist)
+
+
+
+# 0x200 Components
+
 # C1: Token
 
 ## Control Objective
