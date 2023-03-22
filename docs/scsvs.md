@@ -1,3 +1,94 @@
+# 0x100 General
+
+# G1: Architecture, design and threat modeling
+
+## Control Objective
+
+Architecture, design and threat modeling in the context of creating secure smart contracts.
+Consider all possible threats before the implementation of the smart contract.
+
+Ensure that a verified contract satisfies the following high-level requirements:
+* All related smart contracts are identified and used properly,
+* Specific smart contracts security assumptions are considered during the design phase.
+
+Category “G1” lists requirements related to the architecture, design and threat modeling of the smart contracts.
+
+## Security Verification Requirements
+
+| # | Description |
+| --- | --- |
+| **G1.1** | Verify that every introduced design change is preceded by an earlier threat modeling. |
+| **G1.2** | Verify that the documentation clearly and precisely defines all trust boundaries in the contract (trusted relations with other contracts and significant data flows).  |
+| **G1.3** | Verify that the SCSVS, security requirements or policy is available to all developers and testers. |
+| **G1.4** | Verify that the events for the (state changing/crucial for business) operations are defined. |
+| **G1.5** | Verify that there exists a mechanism that can temporarily stop the sensitive functionalities of the contract in case of a new attack. This mechanism should not block access to the assets (e.g. tokens) for their owners. |
+| **G1.6** | Verify that the amount of unused cryptocurrencies kept on the contract is controlled and at the minimum acceptable level so as not to become a potential target of an attack. |
+| **G1.7** | Verify that if fallback function can be called by anyone, it is included in the threat modeling. |
+| **G1.8** | Verify that the business logic in contracts is consistent. Important changes in the logic should be allowed for all or none contract. |
+| **G1.9** | Verify that code analysis tools are in use that can detect potentially malicious code. |
+| **G1.10** | Verify that the latest version of the major Solidity release is used. |
+| **G1.11** | Verify that, when using the external implementation of contract, you use the current version which has not been superseded. |
+| **G1.12** | Verify that when functions are overridden to extend functionality, the super keyword is used to maintain functionality. |
+| **G1.13** | Verify that the order of inheritance is carefully specified. |
+| **G1.14** | Verify that there is a component that monitors contract activity using events. |
+| **G1.15** | Verify that the threat model includes whale transactions. |
+| **G1.16** | Verify that the leakage of one person's private key does not compromise the security of the entire project. |
+
+## References
+
+For more information, see also:
+
+* [Instant Threat Modeling - SecuRing](https://www.youtube.com/watch?v=IwR4PAmRhhg&list=PL-lO2xrptAtav4SZgCdDkVxChWhVU3kmP&index=18)
+* [OWASP Threat Modeling Cheat Sheet](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Threat_Modeling_Cheat_Sheet.md)
+* [OWASP Attack Surface Analysis Cheat Sheet](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Attack_Surface_Analysis_Cheat_Sheet.md)
+* [OWASP Threat modeling](https://www.owasp.org/index.php/Application_Threat_Modeling)
+* [Microsoft SDL](https://www.microsoft.com/en-us/sdl/)
+* [NIST SP 800-57](https://csrc.nist.gov/publications/detail/sp/800-57-part-1/rev-4/final)
+* [Use events to monitor contract activity](https://consensys.github.io/smart-contract-best-practices/recommendations/#use-events-to-monitor-contract-activity)
+* [An example of superseded contract - EIP 1820](https://eips.ethereum.org/EIPS/eip-1820)
+
+# G2: Policies and procedures
+
+## Control Objective
+
+Policies and procedures in the context of security of DeFi projects.
+Think about possible situations and be prepared in case they arise. Act consciously and efficiently in accordance with a well-thought-out strategy.
+
+Ensure that your project satisfies the following high-level requirements:
+* Security procedures and policies are thought out and ready to use,
+* Procedures and policies cover known and common threats from the past of other DeFi projects,
+* Employees are familiar with the policies and procedures, and they know what they are responsible for.
+
+Category “G2” lists requirements related to the policies, and procedures in the context of security of DeFi projects.
+
+## Security Verification Requirements
+
+| # | Description |
+| --- | --- |
+| **G2.1** | Verify that the system's security is under constant monitoring (e.g. the expected level of funds). |
+| **G2.2** | Verify that there is a policy to track new security bugs and to update the libraries to the latest secure version. |
+| **G2.3** | Verify that the contact to the security department is publicly disclosed and the procedure for handling reported bugs (e.g., thorough BugBounty platform) is defined. |
+| **G2.4** | Verify that the process prior to adding new components to the system is defined. |
+| **G2.5** | Verify that the process of major system changes involves threat modeling by an external company. |
+| **G2.6** | Verify that the process of adding and updating components to the system includes a security audit by an external company. |
+| **G2.7** | Verify that there is a clear and known procedure in place in the event of a hack. |
+| **G2.8** | Verify that the procedure in the event of hack have defined individuals to execute required actions. |
+| **G2.9** | Verify that the procedure includes alarming other projects about the hack through trusted channels. |
+| **G2.10** | Verify that a procedure is defined in case one of the project's private keys is leaked. |
+| **G2.11** | Verify that the project has an emergency contact with the external company that conducted the last audit. |
+
+## References
+
+For more information, see also:
+
+* [Emergency Procedures - Yearn Finance](https://docs.yearn.finance/vaults/0.4.2/process-and-procedures/emergency)
+* [Emergency tools - Yearn Finance](https://docs.yearn.finance/vaults/0.4.2/process-and-procedures/emergency#tools)
+* [Emergency checklist - Yearn Finance](https://docs.yearn.finance/vaults/0.4.2/process-and-procedures/emergency#emergency-checklist)
+
+
+
+# 0x200 Components
+
 # C1: Token
 
 ## Control Objective
@@ -251,3 +342,112 @@ For more information, see also:
 * [Distributed validator specs](https://github.com/ethereum/distributed-validator-specs)
 * [Distributed Validators: Improving Staking No Matter Your ETH Balance](https://www.youtube.com/watch?v=zSt6McTVNVE)
 * [MAXIMAL EXTRACTABLE VALUE (MEV)](https://ethereum.org/en/developers/docs/mev/)
+
+# 0x300 Integrations
+
+# I1: Basic
+
+## Control Objective
+
+The spirit of composability introduces many integrations between different entities, creating complex and multi-level relationships at the same time. This environment can introduce complex logical vulnerabilities or issues related to bad assumptions due to too much trust in external components.
+
+Ensure that the integration process satisfies the following high-level requirements:
+* We integrate with a proven component that we consider trusted,
+* Vulnerabilities identified in various Token implementations have been taken into account during implementation.
+
+Category “I1” lists requirements related to each integration with any smart contract.
+
+## Security Verification Requirements
+
+| # | Description |
+| --- | --- |
+| **I1.1** | Verify if the team is known and can be held liable for abuses. |
+| **I1.2** | Verify that the external contract you want to use has been audited. |
+| **I1.3** | Verify that the external contract you want to use has been verified on blockchain explorer (e.g., etherscan).  |
+| **I1.4** | Verify that the contract with which you are integrating has passed SCSVS. |
+| **I1.5** | Verify that the address of the integrated contract is correct, up-to-date, and consistent with the project documentation. |
+| **I1.6** | Verify if the external contract is upgradeable in a trusted manner. |
+| **I1.7** | Verify that no untrusted party can change the contract's implementation. |
+| **I1.8** | Verify that external contracts comply with the principle of minimum rights and that their access to special functions is enforced by the appropriate modifiers. |
+| **I1.9** | Verify whether the structures (types) received from the external contract are known and handled. |
+| **I1.10** | Verify that the smart contract attributes that can be updated by the external contracts (even trusted) are monitored (e.g. using events) and the procedure of incident response is implemented (e.g. the response to an ongoing attack). |
+| **I1.11** | Verify that the external contracts (even trusted) that are allowed to change the attributes of the smart contract (e.g., token price) have the following limitations implemented: a threshold for the change (e.g. no more/less than 5%) and a limit of updates (e.g., one update per day). |
+| **I1.12** | Verify that the address called via low-level call/delegatecall/staticcall exists (it will return *true* if the contract does not exist). |
+
+# I2: Token
+
+## Control Objective
+
+If a project integrates with external Token smart contracts, it is necessary to approach them with limited trust and check that they do not introduce unexpected behavior into our system.
+
+Ensure that a verified contract satisfies the following high-level requirements:
+* Contract follows a tested and stable Token standard,
+* The properties of the Token that we enter into our system are known and properly handled.
+* Vulnerabilities identified in various Token implementations have been taken into account during implementation.
+
+Category “I2” lists requirements related to the Token smart contract as one of the components with which the project integrates.
+
+## Security Verification Requirements
+
+| # | Description |
+| --- | --- |
+| **I2.1** | Verify if the external Token implementation is compliant with the standard implementation. |
+| **I2.2** | Verify if the rules on which a new external Token can be added to the system have been defined (no restrictions, any tokens added by Governance, etc.).  |
+| **I2.3** | Verify that the allowlist approach is used when only selected tokens are introduced to the system. |
+| **I2.4** | Verify if the external Token implementation is non-standard (e.g. it is deflationary, or contains a fee), it has been taken into consideration. |
+| **I2.5** | Verify that if the external Token implementation includes external calls, it has been taken into consideration (e.g., protection against reentrancy). |
+| **I2.6** | Verify that the external Token magnitude (decimals) are known and that all operations are executed with the correct magnitude. |
+| **I2.7** | Verify that the external Token supply is specified and corresponds to the documentation. |
+| **I2.8** | Verify that the external Tokens of any user cannot be locked or frozen by any entity (e.g., owner). |
+| **I2.9** | Verify that the reentrancy attack has been considered when using the token contracts with callbacks (e.g. ERC-777, ERC-721, ERC-1155). |
+| **I2.10** | Verify that transfer of external Tokens has been successful, comparing the balances before and after it. |
+| **I2.11** | Verify that project contracts handles correctly both types of tokens, those that return false on an error and those that revert. |
+| **I2.12** | Verify that the contract reverts on failed transfer. |
+| **I2.13** | Verify that the protocol handles double-entry tokens (tracking user balances in a contract represented by two addresses) correctly or forbids them. |
+| **I2.14** | Use OpenZeppelin's SafeERC20 for interacting with ERC20 tokens. |
+
+## References
+
+For more information, see also:
+
+* [Token Interaction Checklist Consensys](https://consensys.net/diligence/blog/2020/11/token-interaction-checklist/)
+* [Token Integration Checklist ToB](https://github.com/crytic/building-secure-contracts/blob/master/development-guidelines/token_integration.md)
+* [The Dangers of Token Integration](https://www.youtube.com/watch?v=6GaCt_lM_ak)
+* [Token Implementation Best Practice](https://consensys.github.io/smart-contract-best-practices/tokens/)
+* [iToken Duplication Incident Report](https://bzx.network/blog/incident)
+* [The Dangers of Surprising Code](https://samczsun.com/the-dangers-of-surprising-code/)
+* [ERC20 standard peculiarities](https://github.com/d-xo/weird-erc20)
+
+# I3: Oracle
+
+## Control Objective
+
+If a project integrates with external Oracle smart contracts, it is necessary to approach them with limited trust and check that they do not introduce unexpected behavior into our system.
+
+Ensure that a verified contract satisfies the following high-level requirements:
+* Contract follows a tested and stable Oracle standard,
+* The values transferred are additionally verified,
+* Vulnerabilities identified in various Oracle implementations have been taken into account during implementation.
+
+Category “I3” lists requirements related to the Oracle smart contract as one of the components with which the project integrates.
+
+## Security Verification Requirements
+
+| # | Description |
+| --- | --- |
+| **I3.1** | Verify that, when using Uniswap TWAP as a price oracle, the period is long enough to make its manipulation unprofitable for the attacker (compared to the funds at potential risk). |
+| **I3.2** | Verify that Oracle data is up-to-date. |
+| **I3.3** | Verify that no spot oracle is used (e.g. spot price from Uniswap pool). |
+| **I4.4** | Verify that, when using Uniswap V3 TWAP as price oracle, liquidity is high enough and is distributed widely across most of the price range. |
+| **I4.5** | Verify that, the use a decentralized off-chain oracles unsusceptible to on-chain price manipulation attacks (e.g. Chainlink) is considered for low liquidity asset, ideally combining it with on-chain oracles to detect malicious values. |
+
+## References
+
+For more information, see also:
+
+* [The Dangers of Price Oracles in Smart Contracts](https://www.youtube.com/watch?v=YGO7nzpXCeA)
+* [TWAP Oracle Manipulation Risks, Mudit Gupta - DeFi Security Summit 2022](https://www.youtube.com/watch?v=Mu8ytTyStOU)
+* [TWAP Oracles After the Merge, Mark Toda - DeFi Security Summit 2022](https://www.youtube.com/watch?v=mqrCvNgBXUk)
+* [So you want to use a price oracle](https://samczsun.com/so-you-want-to-use-a-price-oracle/)
+* [Pricing LP tokens | Warp Finance hack](https://cmichel.io/pricing-lp-tokens/)
+* [Uniswap V3 tick price manipulation](https://medium.com/@hacxyk/we-rescued-4m-from-rari-capital-but-was-it-worth-it-39366d4d1812)
