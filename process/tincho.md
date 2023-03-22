@@ -1,6 +1,6 @@
-## Original
+## Tincho's way of doing smart contract audit
 
-[Link](https://www.youtube.com/watch?v=bYdiF06SLWc)
+[Original](https://www.youtube.com/watch?v=bYdiF06SLWc)
 
 ## Get Context
 
@@ -67,3 +67,7 @@ Pay attention not to go deep in domain specific logic unrelated to the project.
 ## Code smells
 - external call to attacker an attacker controlled address
 - assemblies in ERC20 tokens, compiler checks 
+
+## Time consumption
+
+50/50 for audit and write report
