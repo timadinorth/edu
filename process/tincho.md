@@ -44,7 +44,7 @@ Goal - build a mental model by going up and composing logics based on small logi
 
 Write questions, like "what this constant is for", to answer later.
 
-Pay attention not to go deep in domain specific logic unrelated to the project.
+Keep an adversarial mindset, how can you trick this function, how make this part of the system behave in such a way that was not expected?
 
 ## Write separate list of issues and test it
 
@@ -59,3 +59,11 @@ Can go up from small issues to increase attack surface.
 Ask questions, raise issues.
 
 Not to trust too much on devs cuz their interpretations can be wrong.
+
+## Time bound yourself
+
+Pay attention not to go deep in domain specific logic unrelated to the project.
+
+## Code smells
+- external call to attacker an attacker controlled address
+- assemblies in ERC20 tokens, compiler checks 
